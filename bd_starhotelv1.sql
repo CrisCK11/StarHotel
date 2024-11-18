@@ -47,7 +47,7 @@ CALL ObtenerHabitacionesDisponibles(2, '2024-10-01', '2024-10-10');
 //=========================================================
 
 INSERT INTO tb_pago (id_reservacion, metodo_pago, titular_tarjeta, num_tarjeta, monto_pagado, fecha_pago)
-VALUES (2, 'TARJETA_CREDITO', 'Juan Pérez', '1234567812345678', 100.50, NOW());
+VALUES (1, 'TARJETA_CREDITO', 'Juan Pérez', '1234567812345678', 100.50, NOW());
 
 select * from tb_pago;
 
