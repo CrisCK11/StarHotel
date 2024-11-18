@@ -1,0 +1,273 @@
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <div class="card shadow">
+        <div class="card-body">
+          <div class="cardTop">
+            <h1 style="margin: 0; margin-top: -12px">
+              <strong
+                style="
+                  text-transform: uppercase;
+                  font-size: 18px;
+                  color: #434b55;
+                "
+                >Habitación</strong
+              >
+              <p
+                style="
+                  text-transform: uppercase;
+                  margin-top: -8px;
+                  font-weight: bold;
+                "
+              >
+                {{ habitacion?.tipo?.descripcion }}
+              </p>
+            </h1>
+            <div style="margin: 6px 0">
+              <p class="badge bg-success" style="display: block">
+                {{ habitacion?.estado }}
+              </p>
+            </div>
+          </div>
+          <div
+            style="
+              font-weight: bold;
+              display: flex;
+              align-items: center;
+              font-size: 14px;
+              justify-content: space-around;
+            "
+          >
+            <div class="precio">
+              <strong style="color: #434b55; font-size: 14px"
+                >Por noche desde</strong
+              >
+              <p style="font-size: 24px">
+                S/. {{ habitacion?.precioPorNoche }}
+              </p>
+            </div>
+          </div>
+          <p style="font-size: 12px">{{ habitacion?.descripcion }}</p>
+          <div
+            style="
+              display: flex;
+              justify-content: center;
+              flex-direction: column;
+              align-items: center;
+            "
+          >
+            <strong style="text-align: center; color: #434b55"
+              >Capacidad</strong
+            >
+            <p style="font-weight: lighter">
+              <strong>Máximo </strong
+              ><strong>{{ habitacion?.capacidad }}</strong>
+              <strong> personas</strong>
+            </p>
+          </div>
+          <div
+            style="
+              display: flex;
+              justify-content: center;
+              flex-direction: column;
+              align-items: center;
+            "
+          >
+            <strong style="text-align: center; color: #434b55">Estancia</strong>
+            <p style="font-weight: lighter">
+              <strong>Duración: {{ diasHospedaje }} días</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="imageContain">
+        <img
+          src="{{ habitacion?.imageHabitacion }}"
+          alt="{{ habitacion?.descripcion }}"
+          class="img-fluid"
+          style="object-fit: cover; height: 100%; width: 100%"
+        />
+      </div>
+    </div>
+
+    <div class="col-6 card shadow" style="padding: 20px">
+      <h2>Registrar Huésped</h2>
+
+      <form [formGroup]="reservaForm">
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input
+            type="text"
+            id="nombre"
+            formControlName="nombre"
+            class="form-control"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="apellido" class="form-label">Apellido</label>
+          <input
+            type="text"
+            id="apellido"
+            formControlName="apellido"
+            class="form-control"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            class="form-control"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="nombreuser" class="form-label">Nombre de Usuario</label>
+          <input
+            type="text"
+            id="nombreuser"
+            formControlName="nombreuser"
+            class="form-control"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="telefono" class="form-label">Teléfono</label>
+          <input
+            type="text"
+            id="telefono"
+            formControlName="telefono"
+            class="form-control"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="direccion" class="form-label">Dirección</label>
+          <input
+            type="text"
+            id="direccion"
+            formControlName="direccion"
+            class="form-control"
+          />
+        </div>
+
+        <div class="row" style="margin: 30px 0">
+          <h2 class="text-center mb-3">Agregar un Servicio Extra</h2>
+
+          <div class="col-md-8 offset-md-2">
+            <label for="servicios" class="form-label fw-bold"
+              >Selecciona un Servicio</label
+            >
+            <select
+              name="servicios"
+              id="servicios"
+              class="form-select form-select-lg"
+              aria-label="Selecciona un servicio"
+              formControlName="servicioId"
+              (change)="onSelectServicio($event)"
+            >
+              <option value="" disabled>Selecciona un servicio</option>
+              <option
+                *ngFor="let servicio of listaServicios"
+                [value]="servicio.id_servicio"
+              >
+                {{ servicio.descripcion }}
+              </option>
+            </select>
+          </div>
+
+          <button
+            type="button"
+            class="btn btn-danger"
+            style="margin-top: 40px; width: 100%"
+            data-bs-toggle="modal"
+            data-bs-target="#modalPayment"
+            (click)="titulo('Payment')"
+          >
+            Ir a pagar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <form [formGroup]="formPayment">
+    <div class="modal fade" id="modalPayment">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Metodo de Pago</h5>
+            <button
+              type="button"
+              class="btn-close"
+              (click)="cerrarBoton()"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <select
+                    name="metodoPago"
+                    id="metodoPago"
+                    formControlName="metodoPago"
+                    class="form-select"
+                  >
+                    <option value="" disabled selected>
+                      Seleccione un método de pago
+                    </option>
+                    <option value="TARJETA_CREDITO">Tarjeta de Crédito</option>
+                    <option value="TARJETA_DEBITO">Tarjeta de Débito</option>
+                    <option value="EFECTIVO">Efectivo</option>
+                    <option value="PAYPAL">PayPal</option>
+                  </select>
+                </div>
+
+                <div class="row mt-3">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Titular de la Tarjeta"
+                      formControlName="titularTarjeta"
+                      required
+                    />
+                    <label for="Titular">Titular de la Tarjeta</label>
+                  </div>
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Numero de la Tarjeta"
+                      formControlName="numeroTarjeta"
+                    />
+                    <label for="Numero">Numero de la Tarjeta</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              (click)="cerrarBoton()"
+            >
+              Cerrar
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              (click)="grabarReserva()"
+            >
+              {{ nameBoton }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

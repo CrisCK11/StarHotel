@@ -1,0 +1,102 @@
+<div class="container">
+  <div class="row">
+    <div
+      *ngFor="let habitacion of habitaciones"
+      style="width: 540px"
+      class="col-auto mb-4 cardRoom"
+    >
+      <div class="card shadow">
+        <div class="card-body">
+          <div class="cardTop">
+            <h1 style="margin: 0; margin-top: -12px">
+              <strong
+                style="
+                  text-transform: uppercase;
+                  font-size: 18px;
+                  color: #434b55;
+                "
+                >Habitación</strong
+              >
+              <p
+                style="
+                  text-transform: uppercase;
+                  margin-top: -8px;
+                  font-weight: bold;
+                "
+              >
+                {{ habitacion.tipo.descripcion }}
+              </p>
+            </h1>
+            <div style="margin: 6px 0">
+              <p class="badge bg-success" style="display: block">
+                {{ habitacion.estado }}
+              </p>
+            </div>
+          </div>
+          <div
+            style="
+              font-weight: bold;
+              display: flex;
+              align-items: center;
+              font-size: 14px;
+              justify-content: space-around;
+            "
+          >
+            <div class="precio">
+              <strong style="color: #434b55; font-size: 14px"
+                >Por noche desde</strong
+              >
+              <p style="font-size: 24px">S/. {{ habitacion.precioPorNoche }}</p>
+            </div>
+            <button
+              style="width: 100px; background: #017fbb; border-color: #017fbb"
+              class="btn btn-primary"
+              routerLink="/reservar/{{ habitacion.idHabitacion }}"
+            >
+              Reservar
+            </button>
+          </div>
+          <p style="font-size: 12px">{{ habitacion.descripcion }}</p>
+          <div
+            style="
+              display: flex;
+              justify-content: center;
+              flex-direction: column;
+              align-items: center;
+            "
+          >
+            <strong style="text-align: center; color: #434b55"
+              >Capacidad</strong
+            >
+            <p style="font-weight: lighter">
+              <strong>Máximo </strong
+              ><strong>{{ habitacion.capacidad }}</strong>
+              <strong> personas</strong>
+            </p>
+          </div>
+          <div
+            style="
+              display: flex;
+              justify-content: center;
+              flex-direction: column;
+              align-items: center;
+            "
+          >
+            <strong style="text-align: center; color: #434b55">Estancia</strong>
+            <p style="font-weight: lighter">
+              <strong>Duración: {{ diasHospedaje }} días</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="imageContain">
+        <img
+          src="{{ habitacion.imageHabitacion }}"
+          alt="{{ habitacion.descripcion }}"
+          class="img-fluid"
+          style="object-fit: cover; height: 100%; width: 100%"
+        />
+      </div>
+    </div>
+  </div>
+</div>

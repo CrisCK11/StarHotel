@@ -1,0 +1,20 @@
+
+
+.carousel-inner {
+    transition: transform 0.6s ease-in-out;
+  }
+
+  .carousel-caption {
+    color: #000000; 
+  }
+
+  :host ::ng-deep .carousel-caption {
+    color: #000000; 
+  }
+  .carousel-caption {
+    color: #000000; 
+    background-color: rgba(255, 255, 255, 0.7); 
+    padding: 10px; 
+    border-radius: 5px; 
+  }
+  

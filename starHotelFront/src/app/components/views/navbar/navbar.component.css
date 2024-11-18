@@ -1,0 +1,12 @@
+.item-link.dark-mode {
+  color: white;
+  text-decoration: none;
+}
+
+.navbar-brand:hover {
+  color: #000000;
+}
+
+.nav-item a {
+  color: #0080bd;
+}
