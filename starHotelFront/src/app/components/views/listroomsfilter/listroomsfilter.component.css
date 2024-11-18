@@ -1,0 +1,64 @@
+.cardRoom {
+  display: grid;
+  grid-template-columns: 1fr 180px;
+  overflow: hidden;
+}
+
+.cardRoom h1 p {
+  color: #feb100;
+}
+
+.cardTop {
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+
+button:hover {
+  background-color: #129edf !important;
+  border-color: #129edf !important;
+}
+
+.imageContain {
+  width: 160px;
+  overflow: hidden;
+}
+
+.cardRoom img:hover {
+  transform: scale(1.1);
+  transition: 0.5s;
+}
+
+.stateProcess {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: #d0d0d0;
+  z-index: 2;
+  color: #fff;
+}
+
+.stateProcess.active {
+  background-color: #017fbb;
+}
+
+.stateProcessContainer {
+  position: relative;
+}
+
+.stateProcess__line {
+  width: 100px;
+  height: 2px;
+  background-color: #d0d0d0;
+  z-index: -1;
+  display: inline-block;
+  position: absolute;
+  top: 16px;
+}
+
+.stateProcess__line.active {
+  background-color: #017fbb;
+}

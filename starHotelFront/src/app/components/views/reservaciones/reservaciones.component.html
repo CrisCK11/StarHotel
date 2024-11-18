@@ -1,0 +1,181 @@
+<div class="container">
+    <div class="row mb-3">
+      <div class="col text-end">
+        <button
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#modalProducto"
+          (click)="titulo('Crear', null)"
+        >
+          Agregar Nueva Reservación
+        </button>
+        <app-reporte-reservaciones></app-reporte-reservaciones>
+      </div>
+    </div>
+    <div class="row">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Huésped</th>
+            <th>Habitación</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Fin</th>
+            <th>Total Pago</th>
+            <th>Estado</th>
+            <th>Servicio</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let reservacion of listaReservaciones">
+            <td>{{ reservacion.huesped.nombre }} {{ reservacion.huesped.apellido }}</td>
+            <td>{{ reservacion.habitacion.numeroHabitacion }}</td>
+            <td>{{ reservacion.fechaIni | date: 'MM/dd/yyyy' }}</td>
+            <td>{{ reservacion.fechaFin | date: 'MM/dd/yyyy' }}</td>
+            <td>S/. {{ reservacion.totalPago }}</td>
+            <td>{{ reservacion.estadoReservacion }}</td>
+            <td>{{ reservacion.servicio.descripcion }}</td>
+            <td style="display: flex; gap: 8px; justify-content: center">
+              <button
+                class="btn btn-warning"
+                data-bs-toggle="modal"
+                data-bs-target="#modalProducto"
+                (click)="titulo('Editar', reservacion.idReservacion)"
+              >
+                Editar
+              </button>
+              <button
+                class="btn btn-danger"
+                (click)="eliminarReservaciones(reservacion.idReservacion)"
+              >
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <form [formGroup]="formReservaciones">
+      <div class="modal fade" id="modalProducto">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">{{ title }}</h5>
+              <button
+                type="button"
+                class="btn-close"
+                (click)="cerrarBoton()"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="date"
+                      class="form-control"
+                      formControlName="fechaIni"
+                      required
+                    />
+                    <label for="fechaIni">Fecha de Inicio</label>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="date"
+                      class="form-control"
+                      formControlName="fechaFin"
+                      required
+                    />
+                    <label for="fechaFin">Fecha de Fin</label>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Total Pago"
+                      formControlName="totalPago"
+                    />
+                    <label for="TotalPago">Total Pago</label>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Estado"
+                      formControlName="estadoReservacion"
+                    />
+                    <label for="EstadoReservacion">Estado Reservación</label>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-floating mb-3" formGroupName="huesped">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="ID del Huésped"
+                      formControlName="idHuesped"
+                    />
+                    <label for="Huesped">ID del Huésped</label>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-floating" formGroupName="servicio">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="ID del Servicio"
+                      formControlName="id_servicio"
+                    />
+                    <label for="Servicio">ID del Servicio</label>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-floating mb-3" formGroupName="habitacion">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="ID de la Habitación"
+                      formControlName="idHabitacion"
+                    />
+                    <label for="Habitacion">ID de la Habitación</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                (click)="cerrarBoton()"
+              >
+                Cerrar
+              </button>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                (click)="crearEditarReservaciones(nameBoton)"
+              >
+                {{ nameBoton }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>

@@ -1,0 +1,167 @@
+<div class="container">
+    <div class="row mb-3">
+      <div class="col text-end">
+        <button
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#modalHuesped"
+          (click)="titulo('Crear', null)"
+        >
+          Agregar Nuevo Huésped
+        </button>
+        <app-reporte-huesped></app-reporte-huesped>
+
+      </div>
+    </div>
+    <div class="row">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Teléfono</th>
+            <th>Email</th>
+            <th>Nombre de Usuario</th>
+            <th>Dirección</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let huesped of listarHuespedes">
+            <td>{{ huesped.nombre }}</td>
+            <td>{{ huesped.apellido }}</td>
+            <td>{{ huesped.telefono }}</td>
+            <td>{{ huesped.email }}</td>
+            <td>{{ huesped.nombreuser }}</td>
+            <td>{{ huesped.direccion }}</td>
+            <td style="display: flex; gap: 8px; justify-content: center">
+              <button
+                class="btn btn-warning"
+                data-bs-toggle="modal"
+                data-bs-target="#modalHuesped"
+                (click)="titulo('Editar', huesped.idHuesped)"
+              >
+                Editar
+              </button>
+              <button
+                class="btn btn-danger"
+                (click)="eliminarHuesped(huesped.idHuesped)"
+              >
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <form [formGroup]="formHuespedes">
+      <div class="modal fade" id="modalHuesped">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">{{ title }}</h5>
+              <button
+                type="button"
+                class="btn-close"
+                (click)="cerrarBoton()"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Nombre"
+                      formControlName="nombre"
+                      required
+                    />
+                    <label for="Nombre">Nombre</label>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Apellidos"
+                      formControlName="apellido"
+                    />
+                    <label for="Apellidos">Apellidos</label>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="row">
+                <div class="col-6 mb-3 mt-3">
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Teléfono"
+                      formControlName="telefono"
+                    />
+                    <label for="Telefono">Teléfono</label>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-floating mt-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Email"
+                      formControlName="email"
+                    />
+                    <label for="Email">Email</label>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Nombre de Usuario"
+                      formControlName="nombreuser"
+                    />
+                    <label for="NombreUser">Nombre de Usuario</label>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Dirección"
+                      formControlName="direccion"
+                    />
+                    <label for="Direccion">Dirección</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                (click)="cerrarBoton()"
+              >
+                Cerrar
+              </button>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                (click)="crearEditarHuesped(nameBoton)"
+              >
+                {{ nameBoton }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>

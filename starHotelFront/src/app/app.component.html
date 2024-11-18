@@ -1,0 +1,33 @@
+<app-navbar></app-navbar>
+<app-search-room></app-search-room>
+
+<div class="hero my-4">
+  <ngb-carousel [interval]="3000" pauseOnHover="true">
+    <ng-template ngbSlide>
+      <img src="../assets/hero-hotel.jpg" alt="Hotel Slide 1" class="d-block w-100" style="height: 320px; object-fit: cover;">
+      <div class="carousel-caption">
+        <h3>¡Bienvenido a nuestro hotel!</h3>
+      </div>
+    </ng-template>
+    
+    <ng-template ngbSlide>
+      <img src="../assets/img2hotel.jpeg" alt="Hotel Slide 2" class="d-block w-100" style="height: 320px; object-fit: cover;">
+      <div class="carousel-caption">
+        <h3>Disfruta de tu estancia</h3>
+      </div>
+    </ng-template>
+
+    <ng-template ngbSlide>
+      <img src="../assets/img3hotel.jpg" alt="Hotel Slide 3" class="d-block w-100" style="height: 320px; object-fit: cover;">
+      <div class="carousel-caption">
+        <h3>Relájate en nuestras instalaciones</h3>
+      </div>
+    </ng-template>
+  </ngb-carousel>
+</div>
+
+<main>
+  <div class="container pt-2 pb-5">
+    <router-outlet></router-outlet>
+  </div>
+</main>
